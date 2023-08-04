@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  bootpay_webview_flutter_platform_interface:
+    dependency: "direct main"
+    description:
+      name: bootpay_webview_flutter_platform_interface
+      sha256: "109fbac439b78d1c129985ab8880b64fd746884b338ed42b51e5428b1b21be78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   characters:
     dependency: transitive
     description:

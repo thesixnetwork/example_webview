@@ -10,6 +10,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 class WebViewExample extends StatefulWidget {
   final String url;
@@ -43,7 +44,7 @@ class _WebViewExampleState extends State<WebViewExample> {
     late final String userAgent;
     if (Platform.isAndroid) {
       // Android-specific code
-      userAgent = 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.166 Mobile Safari/537.36';
+      userAgent = 'Mozilla/5.0 (Linux; Android 10; Android SDK built for x86 Build/LMY48X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/4.0 Chrome/81.0.4044.117 Mobile Safari/608.2.11';
     } else if (Platform.isIOS) {
       // iOS-specific code
       userAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/115.0.5790.160 Mobile/15E148 Safari/604.1';
@@ -101,6 +102,15 @@ class _WebViewExampleState extends State<WebViewExample> {
       AndroidWebViewController.enableDebugging(true);
       (controller.platform as AndroidWebViewController)
           .setMediaPlaybackRequiresUserGesture(false);
+      (controller.platform as AndroidWebViewController)
+          .setOnPlatformPermissionRequest(
+            (PlatformWebViewPermissionRequest request) {
+              debugPrint(
+                'requesting permissions for ${request.types.map((WebViewPermissionResourceType type) => type.name)}',
+              );
+              request.grant();
+            },
+          );
     }
     // #enddocregion platform_features
 
