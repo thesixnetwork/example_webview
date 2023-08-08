@@ -22,6 +22,7 @@ class WebViewExample extends StatefulWidget {
 
 class _WebViewExampleState extends State<WebViewExample> {
   late final WebViewController _controller;
+  // late final cookieManager = WebViewCookieManager();
 
   @override
   void initState() {
@@ -57,33 +58,17 @@ class _WebViewExampleState extends State<WebViewExample> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            debugPrint('WebView is loading (progress : $progress%)');
           },
           onPageStarted: (String url) {
-            debugPrint('Page started loading: $url');
           },
           onPageFinished: (String url) {
-            debugPrint('Page finished loading: $url');
           },
           onWebResourceError: (WebResourceError error) {
-            debugPrint('''
-            Page resource error:
-              code: ${error.errorCode}
-              description: ${error.description}
-              errorType: ${error.errorType}
-              isForMainFrame: ${error.isForMainFrame}
-                      ''');
           },
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              debugPrint('blocking navigation to ${request.url}');
-              return NavigationDecision.prevent;
-            }
-            debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
           },
           onUrlChange: (UrlChange change) {
-            debugPrint('url change to ${change.url}');
           },
         ),
       )
@@ -95,23 +80,21 @@ class _WebViewExampleState extends State<WebViewExample> {
           );
         },
       );
-      // ..loadRequest(Uri.parse('https://flutter.dev'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
+      // cookieManager.clearCookies();
       AndroidWebViewController.enableDebugging(true);
       (controller.platform as AndroidWebViewController)
           .setMediaPlaybackRequiresUserGesture(false);
       (controller.platform as AndroidWebViewController)
           .setOnPlatformPermissionRequest(
             (PlatformWebViewPermissionRequest request) {
-              debugPrint(
-                'requesting permissions for ${request.types.map((WebViewPermissionResourceType type) => type.name)}',
-              );
               request.grant();
             },
           );
     }
+    // cookieManager.clearCookies();
     // #enddocregion platform_features
 
     _controller = controller;
@@ -126,7 +109,7 @@ class _WebViewExampleState extends State<WebViewExample> {
     }
     return Scaffold(
       appBar: AppBar(title: const Text('Example Webview'), toolbarHeight: 50),
-      body: WebViewWidget(controller: _controller),
+      body: WebViewWidget(controller: _controller)
     );
   }
 // #enddocregion webview_widget

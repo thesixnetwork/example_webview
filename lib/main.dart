@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void getData() async {
     final dio = Dio();
-    final response = await dio.get('https://storage.googleapis.com/techsauce-webview-conf/webview-config.json');
+    final response = await dio.get('https://webview-conf.fivenet.sixprotocol.com/webview-config.json');
     setState(() {
       _url =  response.data['base_url'];
       // _url =  "https://zipeventapp.com/";
