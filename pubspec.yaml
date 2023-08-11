@@ -39,6 +39,8 @@ dependencies:
   webview_flutter: ^4.2.2
   path_provider: ^2.0.15
   bootpay_webview_flutter_platform_interface: ^2.3.0
+  flutter_inappwebview: ^5.7.2+3
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

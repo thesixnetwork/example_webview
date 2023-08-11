@@ -11,7 +11,9 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'example_webview.dart';
 
 class MyChromeSafariBrowser extends ChromeSafariBrowser {
   @override
@@ -29,18 +31,16 @@ class MyChromeSafariBrowser extends ChromeSafariBrowser {
     print("ChromeSafari browser closed");
   }
 }
-
-class WebViewExample extends StatefulWidget {
+class TechSauceWebView extends StatefulWidget {
   final String url;
-
   final ChromeSafariBrowser browser = new MyChromeSafariBrowser();
 
-  WebViewExample({super.key, required this.url});
+   TechSauceWebView({super.key, required this.url});
   @override
-  State<WebViewExample> createState() => _WebViewExampleState();
+  State<TechSauceWebView> createState() => _TechSauceWebViewState();
 }
 
-class _WebViewExampleState extends State<WebViewExample> {
+class _TechSauceWebViewState extends State<TechSauceWebView> {
   late final WebViewController _controller;
   late final cookieManager = WebViewCookieManager();
 
@@ -48,13 +48,12 @@ class _WebViewExampleState extends State<WebViewExample> {
   void initState() {
     super.initState();
 
-    widget.browser.addMenuItem(new ChromeSafariBrowserMenuItem(
+widget.browser.addMenuItem(new ChromeSafariBrowserMenuItem(
         id: 1,
         label: 'Custom item menu 1',
         action: (url, title) {
           print('Custom item menu 1 clicked!');
         }));
-
     // #docregion platform_features
     late final PlatformWebViewControllerCreationParams params;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
@@ -113,13 +112,9 @@ class _WebViewExampleState extends State<WebViewExample> {
               debugPrint('blocking navigation to ${request.url}');
               return NavigationDecision.prevent;
             }
+            // if (request.url.startsWith('https://twitter.com/')) {
+            //   debugPrint("TWITTER");
 
-            // var widgetDomain = Uri.parse(widget.url).host;
-            // var requestDomain = Uri.parse(request.url).host;
-
-            // var isSameDomain = widgetDomain == requestDomain;
-
-            // if(widgetDomain.indexOf("twitter.com")!=-1 && requestDomain.indexOf("twitter.com")==-1) {
             //   var returnUrl = await Navigator.push(
             //         context,
             //         MaterialPageRoute(
@@ -129,17 +124,16 @@ class _WebViewExampleState extends State<WebViewExample> {
             //   return NavigationDecision.prevent;
             // }
 
-            // if(widgetDomain.indexOf("twitter.com")==-1 && requestDomain.indexOf("twitter.com")!=-1) {
-            //   Navigator.pop(context,request.url);
-            //   return NavigationDecision.prevent;
-            // }
-
-            if(request.url.startsWith("https://ts.fivenet.sixprotocol.com/register")) {
-              debugPrint("LAST");
-              Navigator.pop(context,request.url);
+            if (request.url.startsWith('https://twitter.com/')) {
+              await widget.browser.open(
+                  url: Uri.parse(request.url),
+                  options: ChromeSafariBrowserClassOptions(
+                      android: AndroidChromeCustomTabsOptions(
+                          shareState: CustomTabsShareState.SHARE_STATE_OFF),
+                      ios: IOSSafariOptions(barCollapsingEnabled: true)));
               return NavigationDecision.prevent;
             }
-            // extract domain from widget.url
+
             debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
           },
@@ -194,7 +188,7 @@ class _WebViewExampleState extends State<WebViewExample> {
         return false; // Return true if you want to allow the pop, false otherwise.
       },
       child: Scaffold(
-      appBar: AppBar(title: const Text('Example Webview'), toolbarHeight: 50),
+      appBar: AppBar(title: const Text('TechSauce Webview'), toolbarHeight: 50),
       body: WebViewWidget(controller: _controller),
     )
     );

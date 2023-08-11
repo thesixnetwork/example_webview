@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:example_webview/techsauce_webview.dart';
 import 'package:flutter/material.dart';
 
 import 'example_webview.dart';
+import 'techsauce_webview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const MyHomePage(title: "Example"),
+      home: const MyHomePage(title: "Example"),
     );
   }
 }
@@ -63,10 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void getData() async {
     final dio = Dio();
-    final response = await dio.get('https://storage.googleapis.com/techsauce-webview-conf/webview-config.json');
+    final response = await dio.get(
+        'https://storage.googleapis.com/techsauce-webview-conf/webview-config.json');
     setState(() {
-      _url =  response.data['base_url'];
+      // _url =  response.data['base_url'];
       // _url =  "https://zipeventapp.com/";
+      // _url = "https://ts.fivenet.sixprotocol.com/";
+      _url = "https://tswv.sixprotocol.com/";
+      // _url =  "https://twitter.com/i/oauth2/authorize?response_type=code&client_id=eVRVM051V3NKcUh2Y21WcG92OWY6MTpjaQ&redirect_uri=https://ts.fivenet.sixprotocol.com/register&scope=tweet.read%20users.read%20follows.read%20follows.write&state=state&code_challenge=challenge&code_challenge_method=plain";
+      // _url =  "https://twitter.com/i/oauth2/authorize?response_type=code&client_id=eVRVM051V3NKcUh2Y21WcG92OWY6MTpjaQ&scope=follows.read%20tweet.read%20users.read%20offline.access&redirect_uri=https://ts.fivenet.sixprotocol.com/register&code_challenge=challenge&code_challenge_method=plain&state=states";
+      // _url =  "https://twitter.com/i/oauth2/authorize?response_type=code&client_id=eVRVM051V3NKcUh2Y21WcG92OWY6MTpjaQ&scope=follows.read%20tweet.read%20users.read%20offline.access&redirect_uri=https://194d-110-49-44-82.ngrok-free.app/register&code_challenge=challenge&code_challenge_method=plain&state=states";
+      // _url =  "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=593361572149-69eg9gffia1bo62ccbm37igkq2jh9tjj.apps.googleusercontent.com&redirect_uri=https%3A%2F%2F7c4a-124-122-175-110.ngrok-free.app%2Fregister";
     });
   }
 
@@ -75,12 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     getData();
-
   }
 
   @override
   Widget build(BuildContext context) {
-        // getData();
+    // getData();
 
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -117,36 +125,33 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
-                        ElevatedButton(
-          child: const Text('Refresh'),
-          onPressed: () {
-              getData();
-            // Navigate to second route when tapped.
-          }),
-
-           SizedBox(height: 30),
-
-
-               const Text(
+            ElevatedButton(
+                child: const Text('Refresh'),
+                onPressed: () {
+                  getData();
+                  // Navigate to second route when tapped.
+                }),
+            SizedBox(height: 30),
+            const Text(
               'Endpoint',
             ),
             Text(
               '$_url',
               style: Theme.of(context).textTheme.bodySmall,
             ),
-
             ElevatedButton(
-          child: const Text('Open Webview'),
-          onPressed: () {
-              Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) =>  WebViewExample(url: _url)),
-  );
-            // Navigate to second route when tapped.
-          }),
-            
-                   ],
+                child: const Text('Open Webview'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TechSauceWebView(
+                              url: _url,
+                            )),
+                  );
+                  // Navigate to second route when tapped.
+                }),
+          ],
         ),
       ),
 // This trailing comma makes auto-formatting nicer for build methods.
