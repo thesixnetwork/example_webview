@@ -18,6 +18,12 @@ dependencies: \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/Flutter.framework/Headers/FlutterViewController.h \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/device_info_plus/device_info_plus.framework/Headers/FLTDeviceInfoPlusPlugin.h \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/device_info_plus/device_info_plus.framework/Modules/module.modulemap \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/device_info_plus/device_info_plus.framework/Headers/device_info_plus-umbrella.h \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/package_info_plus/package_info_plus.framework/Headers/FLTPackageInfoPlusPlugin.h \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/package_info_plus/package_info_plus.framework/Modules/module.modulemap \
+  /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/package_info_plus/package_info_plus.framework/Headers/package_info_plus-umbrella.h \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/path_provider_foundation/path_provider_foundation.framework/Modules/module.modulemap \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-umbrella.h \
   /Users/nantanart/git/example_webview/ios/build/Debug-iphoneos/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-Swift.h \

@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import 'example_webview.dart';
+// import 'example_webview.dart';
+import 'inapp_webview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -65,8 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final dio = Dio();
     final response = await dio.get('https://webview-conf.fivenet.sixprotocol.com/webview-config.json');
     setState(() {
-      _url =  response.data['base_url'];
-      // _url =  "https://zipeventapp.com/";
+      // _url =  response.data['base_url'];
+      _url =  "https://tswv.sixprotocol.com/scan";
     });
   }
 
@@ -141,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
               Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) =>  WebViewExample(url: _url)),
+    MaterialPageRoute(builder: (context) =>  InappWebView(openUrl: _url, appBarTitle: "NFT WebView",)),
   );
             // Navigate to second route when tapped.
           }),
