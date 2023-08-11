@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
               Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) =>  InappWebView(openUrl: _url, appBarTitle: "NFT WebView",)),
+    MaterialPageRoute(builder: (context) =>  InappWebView(openUrl: _url, appBarTitle: 'Example Webview',)),
   );
             // Navigate to second route when tapped.
           }),
